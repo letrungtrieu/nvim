@@ -7,7 +7,7 @@ dap.configurations.rust = {
     type = "codelldb",
     request = "launch",
     program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
     end,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
@@ -18,7 +18,7 @@ dap.configurations.rust = {
     type = "codelldb",
     request = "launch",
     program = function()
-      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
     end,
     args = function()
       local input = vim.fn.input("Arguments: ")
