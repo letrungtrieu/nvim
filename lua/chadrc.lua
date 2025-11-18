@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "solarized_dark",
+	theme = "vscode_dark",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
