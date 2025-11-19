@@ -25,8 +25,8 @@ M.base46 = {
     ["@function"] = { fg = "#c7c79b" },
 
     -- Variable (default white)
-    Identifier = { fg = "#D4D4D4" },
-    ["@variable"] = { fg = "#D4D4D4" },
+    Identifier = { fg = "#9cdcfe" },
+    ["@variable"] = { fg = "#9cdcfe" },
 
     -- Type: xanh nước biển nhẹ
     Type = { fg = "#4EC9B0" },
