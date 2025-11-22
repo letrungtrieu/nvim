@@ -9,6 +9,8 @@ map("i", "jk", "<ESC><cmd>w<cr>")
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+map({ "t" }, "<C-x>", "<C-\\><C-n> <cmd>bdelete!<cr>")
+
 -- Nvim DAP
 map("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
 map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
