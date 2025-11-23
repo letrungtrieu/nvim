@@ -115,4 +115,16 @@ return {
       { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
+  {
+    "mg979/vim-visual-multi",
+    lazy = false,
+    init = function()
+    end,
+  },
+  {
+    "folke/flash.nvim",
+    init = function()
+      require("flash").setup()
+    end,
+  },
 }
