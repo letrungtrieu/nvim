@@ -127,4 +127,32 @@ return {
       require("flash").setup()
     end,
   },
+  {
+    "leoluz/nvim-dap-go",
+    dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+    config = function()
+      require("dap-go").setup()  -- Setup tự động adapter và configs cơ bản
+    end,
+    ft = "go",
+    opts = {  -- Custom options cho plugin
+      delve = {
+        path = "dlv",  -- Đường dẫn dlv (mặc định PATH)
+        initialize_timeout_sec = 20,  -- Timeout init session
+        port = "${port}",  -- Port ngẫu nhiên
+        build_flags = { "-tags", "integration" },  -- Flags build tùy chỉnh nếu cần
+      },
+      dap_configurations = {  -- Thêm configs custom (sẽ merge vào dap.configurations.go)
+        {
+          type = "go",
+          name = "Debug current file",
+          request = "launch",
+          program = "${file}",
+        },
+      },
+      -- Tích hợp dap-ui tự động
+      dapui = true,
+    },
+  },
+  -- Các deps khác nếu cần
+  { "theHamsta/nvim-dap-virtual-text", config = true },
 }

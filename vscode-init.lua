@@ -2,6 +2,8 @@
 -- vscode-init.lua (Windows)
 -- Dùng cho VSCode Neovim
 -- ===============================
+-- VSCode
+local vs = require("vscode-neovim")
 
 -- Basic safe settings
 vim.opt.number = true
@@ -53,3 +55,26 @@ require("lazy").setup({
   },
   
 })
+
+-- Key Map
+-- Clear search highlight with ESC
+vim.keymap.set("n", "<Esc>", function()
+  vim.cmd("nohlsearch")
+  -- Trả ESC về VSCode để còn dùng các tính năng khác
+  require("vscode-neovim").call("cursorMove", { to = "viewPortTop", by = "line" })
+end, { silent = true })
+
+-- Jumps
+-- Back
+vim.keymap.set("n", "mh", function()
+  vs.call("workbench.action.navigateBack")
+end, { silent = true })
+
+-- Forward
+vim.keymap.set("n", "ml", function()
+  vs.call("workbench.action.navigateForward")
+end, { silent = true })
+
+-- Disable Vim's own C-o / C-i (optional)
+vim.keymap.set("n", "<C-o>", "<Nop>")
+vim.keymap.set("n", "<C-i>", "<Nop>")
