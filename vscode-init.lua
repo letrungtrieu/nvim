@@ -64,6 +64,9 @@ vim.keymap.set("n", "<Esc>", function()
   require("vscode-neovim").call("cursorMove", { to = "viewPortTop", by = "line" })
 end, { silent = true })
 
+-- Fast Key Esc
+vim.keymap.set("i", "jk", "<Esc>")
+
 -- Jumps
 -- Back
 vim.keymap.set("n", "mh", function()
