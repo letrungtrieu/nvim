@@ -5,7 +5,7 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC><cmd>w<cr>")
+map("i", "jk", "<ESC>")
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd>wa<cr>")
 
@@ -28,3 +28,12 @@ map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugge
 
 -- rustaceanvim
 map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
+
+-- jump when use snip
+map("i", "<Tab>", function()
+  return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<Tab>"
+end, { expr = true })
+map("i", "<S-Tab>", function()
+  return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<Tab>"
+end, { expr = true })
+
