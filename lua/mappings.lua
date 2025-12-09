@@ -73,3 +73,7 @@ end
 
 map("n", "<Leader>kk", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 map("n", "<Leader>kl", vim.diagnostic.setqflist, { desc = "Show list diagnostics" })
+
+-- Quick fix
+map("n", "<Leader>cf", vim.lsp.buf.code_action, { desc = "Quick fix" })
+
