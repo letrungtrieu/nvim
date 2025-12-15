@@ -11,7 +11,12 @@ vim.opt.termguicolors = true
 vim.g.mapleader = " "
 
 -- Lazy bootstrap
-local lazypath = vim.fn.expand("~\\AppData\\Local\\nvim-data\\lazy\\lazy.nvim")
+local lazypath
+if vim.fn.has("win32") == 1 then
+  lazypath = vim.fn.expand("~\\AppData\\Local\\nvim-data\\lazy\\lazy.nvim")
+else
+  lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+end
 if not vim.loop.fs_stat(lazypath) then
   print("Installing lazy.nvim...")
 end
