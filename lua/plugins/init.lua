@@ -23,15 +23,22 @@ return {
     ft = "rust",
 
     config = function()
-      local mason_path = vim.fn.stdpath "data" .. "\\mason"
+      local is_windows = vim.fn.has "win32" == 1 or vim.fn.has "win64" == 1
+      local sep = is_windows and "\\" or "/"
 
-      local codelldb_pkg = mason_path .. "\\packages\\codelldb"
+      local mason_path = vim.fn.stdpath "data" .. sep .. "mason"
+      local codelldb_pkg = mason_path .. sep .. "packages" .. sep .. "codelldb"
+      local extension_path = codelldb_pkg .. sep .. "extension" .. sep
 
-      local extension_path = codelldb_pkg .. "\\extension\\"
+      local codelldb_path, liblldb_path
 
-      local codelldb_path = extension_path .. "adapter\\codelldb.exe"
-
-      local liblldb_path = extension_path .. "\\lldb\\bin\\liblldb.dll"
+      if is_windows then
+        codelldb_path = extension_path .. "adapter" .. sep .. "codelldb.exe"
+        liblldb_path = extension_path .. "lldb" .. sep .. "bin" .. sep .. "liblldb.dll"
+      else
+        codelldb_path = extension_path .. "adapter" .. sep .. "codelldb"
+        liblldb_path = extension_path .. "lldb" .. sep .. "lib" .. sep .. "liblldb.so"
+      end
 
       local cfg = require "rustaceanvim.config"
 
