@@ -28,4 +28,11 @@ dap.configurations.rust = {
     stopOnEntry = false,
     showDisassembly = "never",
   },
+  {
+    name = "Attach to process (PID)",
+    type = "codelldb",
+    request = "attach",
+    pid = require("dap.utils").pick_process,
+    cwd = "${workspaceFolder}",
+  },
 }
