@@ -1,3 +1,8 @@
+vim.uv = vim.uv or vim.loop
+vim.fs = vim.fs or {}
+vim.fs.joinpath = vim.fs.joinpath or function(...)
+  return table.concat({...}, "/"):gsub("//+", "/")
+end
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
