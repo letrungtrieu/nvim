@@ -7,6 +7,12 @@ return {
     respect_buf_cwd = true,
     update_cwd = true,
 
+    -- THÊM PHẦN NÀY ĐỂ BỎ BẰNG FILTER CỦA GIT IGNORE
+    git = {
+      enable = true,
+      ignore = false, -- Cho phép hiện các file bị git ignore (như .env)
+    },
+
     renderer = {
       indent_markers = { enable = true },
       icons = {
