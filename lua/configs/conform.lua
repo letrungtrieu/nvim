@@ -3,8 +3,11 @@ local options = {
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
-    go = { "goimports", "gofumpt" }
+    go = { "goimports", "gofumpt" },
+    -- Utilize official zig fmt via zigfmt for canonical source formatting
+    zig = { "zigfmt" },
   },
+
 
   format_on_save = {
     -- These options will be passed to conform.format()

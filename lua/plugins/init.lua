@@ -61,6 +61,29 @@ return {
   },
 
   {
+    -- Official Zig plugin providing syntax, filetype detection, and compiler commands
+    "ziglang/zig.vim",
+    ft = "zig",
+    init = function()
+      -- Disable built-in format on save so conform.nvim maintains exclusive control over formatting
+      vim.g.zig_fmt_autosave = 0
+    end,
+  },
+
+  {
+    -- Treesitter grammar integration for syntax highlighting and AST queries
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, default_treesitter_options)
+      -- Guarantee that the zig parser is included with the default NvChad parsers
+      if not vim.tbl_contains(default_treesitter_options.ensure_installed, "zig") then
+        table.insert(default_treesitter_options.ensure_installed, "zig")
+      end
+      return default_treesitter_options
+    end,
+  },
+
+
+  {
     "mfussenegger/nvim-dap",
     config = function()
       local dap, dapui = require "dap", require "dapui"

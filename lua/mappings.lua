@@ -77,3 +77,12 @@ map("n", "<Leader>kl", vim.diagnostic.setqflist, { desc = "Show list diagnostics
 -- Quick fix
 map("n", "<Leader>cf", vim.lsp.buf.code_action, { desc = "Quick fix" })
 
+-- Inlay hints toggle for languages with rich type annotations like Zig and Rust
+map("n", "<Leader>th", function()
+  local current_active_buffer = vim.api.nvim_get_current_buf()
+  local is_inlay_hint_currently_enabled = vim.lsp.inlay_hint.is_enabled { bufnr = current_active_buffer }
+  -- Invert the current inlay hint state specifically for the active buffer
+  vim.lsp.inlay_hint.enable(not is_inlay_hint_currently_enabled, { bufnr = current_active_buffer })
+end, { desc = "Toggle LSP inlay hints" })
+
+

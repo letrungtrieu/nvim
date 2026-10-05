@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Print short description when requested via standard project tooling contract
+if [[ "${1:-}" == "--desc" ]]; then
+  echo "Validate Neovim configuration syntax and headless startup"
+  exit 0
+fi
+
+# Print concise usage instructions and examples when requested
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  echo "Usage: $(basename "$0") [options]"
+  echo ""
+  echo "Options:"
+  echo "  --help, -h    Show this help message and exit"
+  echo "  --desc        Print a one-line description and exit"
+  echo "  -v, --verbose Display detailed execution logs"
+  echo ""
+  echo "Description:"
+  echo "  Validates Lua configuration syntax and verifies that Neovim boots headless without errors."
+  exit 0
+fi
+
+verbose_mode=false
+if [[ "${1:-}" == "-v" || "${1:-}" == "--verbose" ]]; then
+  verbose_mode=true
+fi
+
+# Resolve script root directory to ensure robust execution regardless of caller working directory
+project_root_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
+# Verify syntax of all lua files using luajit / nvim embedded runtime
+echo "Checking Lua syntax..."
+syntax_error_detected=false
+while IFS= read -r -d '' target_lua_file; do
+  # Execute luac syntax validation via headless Neovim
+  if ! nvim --headless -c "lua assert(loadfile([[$target_lua_file]]))" -c "q" >/dev/null 2>&1; then
+    echo "Syntax error in: $target_lua_file"
+    syntax_error_detected=true
+  elif [[ "$verbose_mode" == true ]]; then
+    echo "Syntax OK: $target_lua_file"
+  fi
+done < <(find "$project_root_directory/lua" -name "*.lua" -print0)
+
+if [[ "$syntax_error_detected" == true ]]; then
+  echo "Lua syntax checks failed." >&2
+  exit 1
+fi
+
+# Test headless Neovim startup to ensure plugins, options, and autocmds load cleanly
+echo "Testing Neovim headless startup..."
+if ! nvim --headless -c "q" >/dev/null 2>&1; then
+  echo "Neovim startup failed." >&2
+  exit 1
+fi
+
+echo "All checks passed successfully."
+exit 0
