@@ -7,6 +7,12 @@ return {
     respect_buf_cwd = true,
     update_cwd = true,
 
+    -- Configure side panel dimensions and placement
+    view = {
+      side = "left",
+      width = 25,
+    },
+
     -- THÊM PHẦN NÀY ĐỂ BỎ BẰNG FILTER CỦA GIT IGNORE
     git = {
       enable = true,
