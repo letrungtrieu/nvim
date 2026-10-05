@@ -85,4 +85,11 @@ map("n", "<Leader>th", function()
   vim.lsp.inlay_hint.enable(not is_inlay_hint_currently_enabled, { bufnr = current_active_buffer })
 end, { desc = "Toggle LSP inlay hints" })
 
+-- Toggle inline diagnostics overlay (tiny-inline-diagnostic)
+map("n", "<Leader>td", function()
+  -- Toggle inline diagnostic display dynamically
+  require("tiny-inline-diagnostic").toggle()
+end, { desc = "Toggle inline diagnostics" })
+
+
 

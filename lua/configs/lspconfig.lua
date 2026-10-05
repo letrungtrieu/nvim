@@ -1,6 +1,10 @@
 local nvchad_lsp_defaults = require "nvchad.configs.lspconfig"
 nvchad_lsp_defaults.defaults()
 
+-- Suppress default virtual text so tiny-inline-diagnostic handles inline rendering cleanly
+vim.diagnostic.config { virtual_text = false }
+
+
 -- Pre-load nvim-lspconfig so vim.lsp.config is populated with default server schemas in Neovim 0.11+
 require "lspconfig"
 

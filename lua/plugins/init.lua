@@ -185,4 +185,31 @@ return {
   },
   -- Các deps khác nếu cần
   { "theHamsta/nvim-dap-virtual-text", config = true },
+
+  {
+    -- Elegant inline diagnostic overlay with curved connectors under the cursor
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    opts = {
+      preset = "modern",
+      options = {
+        -- Display source language server name (e.g. zls, gopls, lua_ls)
+        show_source = {
+          enabled = true,
+        },
+        -- Support displaying multi-line error explanations clearly
+        multilines = {
+          enabled = true,
+          always_show = true,
+        },
+      },
+    },
+    config = function(_, configured_plugin_options)
+      require("tiny-inline-diagnostic").setup(configured_plugin_options)
+      -- Suppress built-in virtual_text to avoid duplicated diagnostic labels
+      vim.diagnostic.config { virtual_text = false }
+    end,
+  },
 }
+
