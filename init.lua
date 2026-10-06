@@ -11,7 +11,27 @@ vim.list.unique = vim.list.unique or function(target_element_list)
   table.sort(target_element_list)
   return vim.fn.uniq(target_element_list)
 end
+
+-- Neovim 0.11 LSP floating windows call vim.treesitter.start() directly without pcall.
+-- If a treesitter grammar (such as markdown) is missing, assert() crashes the UI thread.
+-- Wrapping start with pcall ensures graceful degradation to standard syntax highlighting.
+if vim.treesitter and vim.treesitter.start then
+  local standard_treesitter_start = vim.treesitter.start
+  vim.treesitter.start = function(target_buffer_identifier, target_language_name)
+    local start_call_successful, start_call_error_message = pcall(
+      standard_treesitter_start,
+      target_buffer_identifier,
+      target_language_name
+    )
+    if not start_call_successful then
+      return false
+    end
+    return true
+  end
+end
+
 vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+
 
 vim.g.mapleader = " "
 

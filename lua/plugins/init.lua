@@ -74,13 +74,18 @@ return {
     -- Treesitter grammar integration for syntax highlighting and AST queries
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, default_treesitter_options)
-      -- Guarantee that the zig parser is included with the default NvChad parsers
-      if not vim.tbl_contains(default_treesitter_options.ensure_installed, "zig") then
-        table.insert(default_treesitter_options.ensure_installed, "zig")
+      -- List of language parsers required for coding and LSP floating documentation windows
+      local required_language_parsers = { "zig", "markdown", "markdown_inline" }
+      for _, parser_name in ipairs(required_language_parsers) do
+        -- Add parser to ensure_installed only if not already registered in defaults
+        if not vim.tbl_contains(default_treesitter_options.ensure_installed, parser_name) then
+          table.insert(default_treesitter_options.ensure_installed, parser_name)
+        end
       end
       return default_treesitter_options
     end,
   },
+
 
 
   {
