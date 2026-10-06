@@ -103,13 +103,20 @@ M.base46 = {
   hl_add = {
     ["@type"] = { fg = "#4EC9B0" },
     ["@boolean"] = { fg = "#569CD6" },
-    -- Ensure LSP semantic tokens are saved in defaults cache
+    -- Ensure LSP semantic tokens and fallback types are preserved in defaults cache
     ["@lsp.type.namespace"] = { fg = "#4EC9B0" },
     ["@lsp.type.class"] = { fg = "#4EC9B0" },
     ["@lsp.type.struct"] = { fg = "#4EC9B0" },
     ["@lsp.type.type"] = { fg = "#4EC9B0" },
     ["@lsp.type.macro"] = { fg = "#C586C0" },
     ["@lsp.type.keyword"] = { fg = "#C586C0" },
+    ["@lsp.type.parameter"] = { fg = "#9CDCFE" },
+    ["@lsp.type.property"] = { fg = "#9CDCFE" },
+    ["@lsp.type.variable"] = { fg = "#9CDCFE" },
+    ["@lsp.type.function"] = { fg = "#DCDCAA" },
+    ["@lsp.type.method"] = { fg = "#DCDCAA" },
+    ["@lsp.type.enumMember"] = { fg = "#4FC1FF" },
+    ["@lsp.type.const"] = { fg = "#4FC1FF" },
   },
 }
 
